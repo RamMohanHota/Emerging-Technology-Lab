@@ -1,6 +1,1 @@
-<<<<<<< HEAD
-=======
-# Emerging-Technology-Lab
-# EMERGING-TECHNOLOGY-LAB
->>>>>>> f6ec37ada62898c261e686c086a9b586bc7837f2
 # EMERGING-TECHNOLOGY-LAB
