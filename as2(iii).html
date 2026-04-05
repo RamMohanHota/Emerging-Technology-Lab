@@ -1,0 +1,45 @@
+<!--Create a JS array of color names. In HTML create a div with fixed height and width.
+Also, create buttons based on array elements. If any button is clicked, the background
+color of the div should change to the corresponding color.-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Div Color</title>
+    <style>
+        #colorBox {
+            width: 500px;
+            height: 200px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+        button {
+            margin: 2px;
+        }
+    </style>
+    <script>
+        let colors = ["red", "green", "blue", "yellow", "purple", "orange", "pink", "brown", "grey", "black"];
+
+        function changeColor(color) {
+            document.getElementById('colorBox').style.backgroundColor = color;
+        }
+
+        window.onload = function() {
+            let buttonContainer = document.getElementById('buttonContainer');
+            for (let color of colors) {
+                let btn = document.createElement('button');
+                btn.innerText = color;
+                btn.onclick = function() { changeColor(color); };
+                buttonContainer.appendChild(btn);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="colorBox"></div>
+    <div id="buttonContainer"></div>
+</body>
+</html>

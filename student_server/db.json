@@ -1,0 +1,7 @@
+{
+    "products": [
+        {"id": "RAM MOHAN", "name": "laptop", "category": "Electornics", "price": 80000},
+        {"id": "KARTEEK", "name": "Mobile", "category": "Electornics", "price": 50000},
+        {"id": "BIDYA", "name": "TShirt", "category": "Clothing", "price": 999}
+    ]
+}

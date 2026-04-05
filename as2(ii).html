@@ -1,0 +1,82 @@
+<!--Create an array of 10 student objects. Each student object has a roll, name, mobile,
+and email. Display all student data in an HTML table. Style the table using CSS.-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            padding: 1rem;
+            background: #fff;
+            color: #222;
+        }
+        h1{
+            font-size: 1.25rem;
+            margin: 0 0 0.5rem 0;
+        }
+        .students{
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .students th, .students td{
+            border: 1px solid #e2e8f0;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        .students thead th{
+            background: #f4f6f8;
+            font-weight: 600;
+        }
+        .students tbody tr:nth-child(even){
+            background: #fbfbfb;
+        }
+        .students tbody tr:hover{
+            background: #f1f7ff;
+        }
+        a{ color: #0366d6; text-decoration: none }
+        a:hover{ text-decoration: underline }
+        @media (max-width: 600px){
+            .students th, .students td{ padding: 8px }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Students</h1>
+        <div id="container"></div>
+    </main>
+
+    <script>
+        const students = [
+            {roll: 1, name: "Ram ", mobile: "8260612345", email: "ram1@example.com"},
+            {roll: 2, name: "Sita ", mobile: "9876512345", email: "sita@example.com"},
+            {roll: 3, name: "bidya ", mobile: "9123456780", email: "bidya@example.com"},
+            {roll: 4, name: "Priyanshu ", mobile: "9988776655", email: "priyanshu@example.com"},
+            {roll: 5, name: "Rohit ", mobile: "7012345678", email: "rohit@example.com"},
+            {roll: 6, name: "Neha ", mobile: "7654321098", email: "neha@example.com"},
+            {roll: 7, name: "sonal", mobile: "7890123456", email: "sonal@example.com"},
+            {roll: 8, name: "karteek", mobile: "7011982345", email: "karteek@example.com"},
+            {roll: 9, name: "katrina", mobile: "7098876655", email: "katrina@example.com"},
+            {roll: 10, name: "ronaldo", mobile: "8877665544", email: "ronaldo@example.com"}
+        ];
+
+        function buildTable(data){
+            const header = `\n<thead>\n<tr><th>Roll</th><th>Name</th><th>Mobile</th><th>Email</th></tr>\n</thead>`;
+            const rows = data.map(s => `\n<tr>\n<td>${s.roll}</td>\n<td>${s.name}</td>\n<td>${s.mobile}</td>\n<td><a href="mailto:${s.email}">${s.email}</a></td>\n</tr>`).join('');
+            return `<table class="students">${header}<tbody>${rows}\n</tbody>\n</table>`;
+        }
+
+        document.getElementById('container').innerHTML = buildTable(students);
+    </script>
+</body>
+</html>

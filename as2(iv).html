@@ -1,0 +1,134 @@
+<!--Create a form to add TODOs with 3 fields – task, date, and time. Each time a task is
+added it should be displayed on the same HTML page along with the existing tasks.
+Style the TODOs with Bootstrap. Every TODO will have a “Done” button and once click
+on Done the respective task should be deleted.-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  /* Container box */
+  .todo-box{
+    max-width:480px;
+    margin:40px auto;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #e6e9ee;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    background:linear-gradient(180deg,#ffffff,#f7f9fc);
+    font-family:Arial, Helvetica, sans-serif;
+  }
+
+  
+
+  /* Form layout */
+  .todo-box form{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+
+  .todo-box input[type="text"],
+  .todo-box input[type="date"],
+  .todo-box input[type="time"]{
+    padding:8px 10px;
+    border:1px solid #cfd6e0;
+    border-radius:6px;
+    flex:1 1 140px;
+  }
+
+  .todo-box input[type="submit"]{
+    padding:8px 12px;
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+  }
+
+  /* List styles */
+  .todo-box ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+  .todo-box li{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;background:#fff;border:1px solid #eef2f6}
+  .todo-box .meta{font-size:0.9em;color:#6b7280;margin-left:8px}
+
+  /* Done button */
+  .done-btn{background:#383939;color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer}
+
+  @media (max-width:480px){.todo-box{margin:20px}}
+</style>
+<body>
+  <div class="todo-box">
+    <h2>My TODOs</h2>
+    <form action="" method="post" onsubmit="addTask(event)">
+        <input type="text" id="Task" placeholder="Enter a task name">
+        <input type="date" name="date" id="date">
+        <input type="time" name="Time" id="time">
+        <input type="submit" value="Add">
+    </form>
+    <p>List of Tasks</p>
+    <ul id="tasks">
+      <li>
+        <div>Playing BGMI <span class="meta">— no date</span></div>
+        <button class="done-btn">Done</button>
+      </li>
+      <li>
+        <div>Workout <span class="meta">— no date</span></div>
+        <button class="done-btn">Done</button>
+      </li>
+    </ul>
+  </div>
+    <script>
+      function addTask(e){
+        e.preventDefault()
+        const task = document.getElementById("Task").value.trim()
+        const date = document.getElementById("date").value
+        const time = document.getElementById("time").value
+        if(!task){
+          alert("Enter task name")
+          return
+        }
+
+        const li = document.createElement('li')
+        const left = document.createElement('div')
+        left.innerHTML = `<span class="task-name">${escapeHtml(task)}</span>` +
+          (date || time ? `<span class="meta"> — ${date}${time ? ' ' + time : ''}</span>` : `<span class="meta"> — no date</span>`)
+
+        const doneBtn = document.createElement('button')
+        doneBtn.className = 'done-btn'
+        doneBtn.innerText = 'Done'
+        doneBtn.onclick = () => li.remove()
+
+        li.append(left, doneBtn)
+        document.getElementById('tasks').append(li)
+
+        document.getElementById('Task').value = ''
+        document.getElementById('date').value = ''
+        document.getElementById('time').value = ''
+      }
+
+      // Add Done buttons to any pre-existing list items
+      document.querySelectorAll('#tasks li').forEach(li => {
+        if(!li.querySelector('.done-btn')){
+          const btn = document.createElement('button')
+          btn.className = 'done-btn'
+          btn.innerText = 'Done'
+          btn.onclick = () => li.remove()
+          li.append(btn)
+        }
+      })
+
+      // simple html escape for task text
+      function escapeHtml(str){
+        return str.replace(/[&<>\"']/g, function(ch){
+          return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])
+        })
+      }
+    </script>
+</body>
+</html>
